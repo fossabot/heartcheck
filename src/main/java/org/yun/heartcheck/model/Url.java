@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.yun.heartcheck.util.JpaConverterObjectJson;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Map;
 
 @Entity
@@ -37,4 +38,8 @@ public class Url {
 
     @ApiModelProperty(name = "is_delete", value = "删除标识", allowableValues = "alive,death", example = "alive")
     private String is_delete;
+
+    @OneToMany(mappedBy = "url_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ApiModelProperty(name = "taskList", value = "任务列表")
+    private List<Task> taskList;
 }

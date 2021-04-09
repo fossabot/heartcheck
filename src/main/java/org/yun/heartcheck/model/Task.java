@@ -5,10 +5,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
-import org.yun.heartcheck.util.JpaConverterObjectJson;
 
 import javax.persistence.*;
-import java.util.Map;
 
 @Entity
 @DynamicUpdate
@@ -21,17 +19,16 @@ public class Task {
     @ApiModelProperty(name = "id", value = "主键")
     private String id;
 
-    @ApiModelProperty(name = "url_id", value = "确定是哪一条url的")
-    private String url_id;
+    @ApiModelProperty(name = "task_name", value = "任务名称")
+    private String task_name;
 
-    @ApiModelProperty(name = "body", value = "请求体信息")
-    @Transient
-    @Convert(converter = JpaConverterObjectJson.class)
-    private Map body;
+    @ApiModelProperty(name = "cron", value = "cron表达式", example = "0/30 * * * * ?")
+    private String cron;
 
     @ApiModelProperty(name = "status", value = "状态标识", allowableValues = "run,stop", example = "run")
     private String status;
 
-    @ApiModelProperty(name = "cron", value = "cron表达式", example = "0/30 * * * * ?")
-    private String cron;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)
+    @JoinColumn(name = "url_id")
+    private Url url;
 }
