@@ -13,28 +13,25 @@ import java.util.Map;
 @Entity
 @DynamicUpdate
 @Data
-@ApiModel("url model")
-public class Url {
-
+@ApiModel("task model")
+public class Task {
     @Id
-    @GenericGenerator(name = "url-uuid", strategy = "uuid")
-    @GeneratedValue(generator = "url-uuid")
+    @GenericGenerator(name = "task-uuid", strategy = "uuid")
+    @GeneratedValue(generator = "task-uuid")
     @ApiModelProperty(name = "id", value = "主键")
     private String id;
 
-    @ApiModelProperty(name = "url", value = "用来访问的地址")
-    private String url;
-
-    @ApiModelProperty(name = "header", value = "请求头信息")
-    @Transient
-    @Convert(converter = JpaConverterObjectJson.class)
-    private Map header;
+    @ApiModelProperty(name = "url_id", value = "确定是哪一条url的")
+    private String url_id;
 
     @ApiModelProperty(name = "body", value = "请求体信息")
     @Transient
     @Convert(converter = JpaConverterObjectJson.class)
     private Map body;
 
-    @ApiModelProperty(name = "is_delete", value = "删除标识", allowableValues = "alive,death", example = "alive")
-    private String is_delete;
+    @ApiModelProperty(name = "status", value = "状态标识", allowableValues = "run,stop", example = "run")
+    private String status;
+
+    @ApiModelProperty(name = "cron", value = "cron表达式", example = "0/30 * * * * ?")
+    private String cron;
 }

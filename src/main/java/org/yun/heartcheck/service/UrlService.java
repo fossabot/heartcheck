@@ -14,7 +14,7 @@ public interface UrlService {
      * @description 新增或保存一条新的url记录
      * @date 2021/4/8 19:47
      **/
-    boolean save(Url model);
+    Url save(Url model);
 
     /**
      * @param id
@@ -23,16 +23,15 @@ public interface UrlService {
      * @description 通过id删除一条url记录
      * @date 2021/4/8 19:47
      **/
-    boolean deleteById(String id);
+    void deleteById(String id);
 
     /**
-     * @param map
-     * @return boolean
+     * @param idList
      * @author wanglianbo a317526763@gmail.com
      * @description 通过某些条件删除url记录，或者将所有url记录删除
      * @date 2021/4/8 19:48
      **/
-    boolean deleteAll(Map<String, String> map);
+    void deleteAll(List<String> idList);
 
     /**
      * @param id
@@ -44,13 +43,13 @@ public interface UrlService {
     Url getModel(String id);
 
     /**
-     * @param map
+     * @param idList
      * @return java.util.List<org.yun.heartcheck.model.Url>
      * @author wanglianbo a317526763@gmail.com
      * @description 通过条件获取url记录，或者获取所有url记录
      * @date 2021/4/8 19:54
      **/
-    List<Url> get(Map<String, String> map);
+    List<Url> get(List<String> idList);
 
     /**
      * @author wanglianbo a317526763@gmail.com
